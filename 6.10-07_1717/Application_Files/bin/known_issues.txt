@@ -1,9 +1,0 @@
-* ANHD/HD MATLAB Figure is invisible after more than one analysis if %APPDATA% is cleared between analyses
-
-* For unique nodal datasets with multiple regions (duplicate node IDs) the ODB interface has no way of knowing which node is which when
-  re-ordering the LABEL parameter for the Abaqus API. Workaround is to use integration point or element-nodal stresses
-
-* Number of nodes appears to mismatch when calculating the peek analysis item
-
-* The ODB interface does not check the connectivity data properly. When checking if an analysis node belongs to the
-  current element, QFT uses the set of all analysed nodes, rather than just the nodes at that element
