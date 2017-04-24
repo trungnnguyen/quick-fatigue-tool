@@ -1,0 +1,176 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="1628385900" file="E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox\Material Manager.prj" location="E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox" name="Material Manager" target="target.mlapps" target-name="Package App">
+    <param.appname>Material Manager</param.appname>
+    <param.authnamewatermark>Louis Vallance</param.authnamewatermark>
+    <param.email>louisvallance@hotmail.co.uk</param.email>
+    <param.company />
+    <param.icon>${PROJECT_ROOT}\Material Manager_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\Material Manager_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\Material Manager_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\Material Manager_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>Store and create material data for fatigue analysis</param.summary>
+    <param.description>Material Manager allows the user to access material databases included with Quick Fatiugue Tool. The application also enables the creation of user-defined materials. For guidance on using Material Manager, please refer to Section 5 of the Quick Fatigue Tool User Guide.</param.description>
+    <param.screenshot />
+    <param.version>6.10.07</param.version>
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Signal Processing Toolbox</item>
+      <item>Statistics Toolbox</item>
+      <item>Symbolic Math Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>1</item>
+      <item>8</item>
+      <item>19</item>
+      <item>15</item>
+    </param.products.id>
+    <param.products.version>
+      <item>8.3</item>
+      <item>6.21</item>
+      <item>9.0</item>
+      <item>6.0</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}\Material Manager.mlappinstall</param.output>
+    <param.guid>030e6763-3206-471a-af85-696829e1ad00</param.guid>
+    <unset>
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.screenshot />
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\MaterialManager.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\algorithm_sip.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\analysis.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\applySignConvention.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\CardanRoots.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\cleanup.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\css.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\css2.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\eig3.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\getAlpha.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\group.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\importMaterial.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\interpolate.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\messenger.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\preProcess.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\evaluateMaterial.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\kSolution.fig</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\kSolution.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\MaterialManager.fig</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\UserMaterial.fig</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\UserMaterial.m</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\B1-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\B1-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\B2-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\B2-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\C-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\C-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\C1-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\C1-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\C2-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\C2-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\D-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\D-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\E-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\E-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\F-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\F-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\F1-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\F1-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\F3-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\F3-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\G-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\G-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\W1-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\W1-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\W2-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\W2-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\W3-air.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\dnv\W3-cath.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\local\SAE-950C.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\Crastin S600F10 [PBT] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\DELRIN 100 [POM] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\Fortron 1140L4 [PPS-GF40] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\Luran 368R [SAN] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\PE-100 [PE-HD] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\Rynite 408 [PET-GF30] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\Ultramid A3WG7 [PA66-GF35] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\plastics\Zytel 101 [PA66] (dry as moulded).mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sae\316 Stainless Steel.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sae\SAE-1018.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sae\SAE-950C.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sae\SAE-950X.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sae\SAE-960X.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sae\SAE-980X.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sn_data\multiple_r_ratios_example.sn</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\sn_data\sn_example.sn</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\system\mat.mat</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material\system\mat_enum.mat</file>
+    </fileset.depfun>
+    <fileset.resources>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\icoR_amplitude.jpg</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\icoR_calculator.jpg</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\icoR_delete.jpg</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\icoR_edit.jpg</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\icoR_fileOpen.jpg</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\material_manager\icoR_info.jpg</file>
+      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Data\material</file>
+    </fileset.resources>
+    <fileset.package />
+    <build-deliverables>
+      <file location="E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox" name="Material Manager.mlappinstall" optional="false">E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox\Material Manager.mlappinstall</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2014a</root>
+      <toolboxes>
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>6.1</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
