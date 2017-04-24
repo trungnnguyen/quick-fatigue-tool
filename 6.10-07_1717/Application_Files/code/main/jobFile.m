@@ -98,6 +98,9 @@ classdef jobFile < handle
             if isempty(useSN) == 1.0
                 useSN = 0.0;
                 setappdata(0, 'useSN', 0.0)
+            elseif length(useSN) > 1.0
+                useSN = useSN(1.0);
+                setappdata(0, 'useSN', useSN)
             end
             
             if isempty(analysisGroups) == 1.0
