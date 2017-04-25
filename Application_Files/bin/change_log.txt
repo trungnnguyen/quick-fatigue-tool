@@ -1,0 +1,43 @@
+FOR A COMPLETE LIST OF CHANGES, PLEASE CONTACT THE AUTHOR
+
+>> CHANGES BETWEEN 6.10-06 AND 6.10-07
+
+16APR17
+* Fixed a bug in Rosette Analysis application where the analysis would
+  crash if the user selected a results directory which does not have
+  read/write access
+
+18APR17
+* Fixed a bug where the endurance limit was always taken from the S-N curve
+  at R=-1 when using the R-ratio S-N Curves mean stress correction, even if
+  the current cycle had a non-zero mean stress
+
+* Fixed a bug where the fatigue limit would not recover, even if the
+  current cycle was below the endurance limit
+
+19APR17
+* Improved workspace caching options with workspaceToFile and
+  workspaceToFileInterval environment variables. User can now cache the
+  workspace variables and associated %APPDATA% as n evenly spaced
+  intervals, every n interval, or as an item ID list
+
+* Fixed a bug where the analysis would crash if workspace caching was
+  enabled, but there was no results directory for the job
+
+21APR17
+* Fixed a bug where the analysis would sometimes crash if user FRF data was
+  formatted incorrectly
+
+* Fixed a bug where the default algorithm would be set to Stress-based
+  Brown-Miller if Uniaxial Stress-Life was specified in the material
+  definition
+
+22APR17
+* The FRF calculation now accounts for the value of RESIDUAL
+
+25APR17
+* Fixed a bug where the hotspot file would not be processed
+  [REGRESSION SINCE 6.10-05]
+
+* Hotspots are now written to the output directory instead of the input
+  directory
