@@ -12,4 +12,4 @@ Preparing Quick Fatigue Tool requires minimal intervention from the user, althou
 
 If the MATLAB working directory is not configured exactly as described above (e.g. the user enters the job directory before running a job file), the application will not run.
 
-![Figure 1](/quick-fatigue-tool/figure/directory.png "Figure 1")
+![Alt text](/../resource/figure/directory.png?raw=true "Optional Title")
