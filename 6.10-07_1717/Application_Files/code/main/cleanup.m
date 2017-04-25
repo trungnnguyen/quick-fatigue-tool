@@ -6,7 +6,7 @@ function [] = cleanup(status)
 %   is not required to run this file.
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 24-Apr-2017 18:27:33 GMT
+%   Last modified 25-Apr-2017 12:13:25 GMT
     
     %%
     
@@ -65,7 +65,7 @@ if status == 1.0
     % Write file header
     fprintf(fid, 'Quick Fatigue Tool 6.10-07\r\n');
     fprintf(fid, '(Copyright Louis Vallance 2017)\r\n');
-    fprintf(fid, 'Last modified 24-Apr-2017 18:27:33 GMT\r\n\r\n');
+    fprintf(fid, 'Last modified 25-Apr-2017 12:13:25 GMT\r\n\r\n');
     
     % Continue writing the file
     fprintf(fid, 'THE ANALYSIS WAS ABORTED FOR THE FOLLOWING REASON(S):');
@@ -165,7 +165,7 @@ if status == 1.0
         rmappdata(0, 'E036')
     end
     if getappdata(0, 'E037') == 1.0
-        fprintf(fid, '\r\n\r\n***ERROR: Multiple load histories are not permitted for Uniaxial Stress-Life');
+        fprintf(fid, '\r\n\r\n***ERROR: Multiple load histories are not permitted for Uniaxial Stress-Life analysis');
         fprintf(fid, '\r\n\r\nError code: E037');
         rmappdata(0, 'E037')
     end

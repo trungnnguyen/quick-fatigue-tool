@@ -7,7 +7,7 @@ classdef messenger < handle
 %   required to run this file.
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 12-Apr-2017 12:25:20 GMT
+%   Last modified 25-Apr-2017 12:13:25 GMT
     
     %%
     
@@ -1364,9 +1364,10 @@ classdef messenger < handle
                         setappdata(0, 'messageFileWarnings', 1.0)
                     case 159.0
                         if getappdata(0, 'suppress_ID159') == 0.0
-                            fprintf(fidType(i), [returnType{i}, '***WARNING: Asymptotic values were calculated by the Morrow mean stress correction', returnType{i}]);
-                            fprintf(fidType(i), ['-> Damage at these items will be assumed as 1e-06', returnType{i}]);
-                            fprintf(fidType(i), ['-> Check the loading for potential non-fatigue conditions and consider using a different mean stress correction', returnType{i}]);
+                            fprintf(fidType(i), [returnType{i}, '***WARNING: After applying the Morrow mean stress correction, some cycles are negative', returnType{i}]);
+                            fprintf(fidType(i), ['-> The Morrow mean stress correction is not defined for mean stress at or above the fatigue strength coefficient (Sf'')', returnType{i}]);
+                            fprintf(fidType(i), ['-> Non-fatigue failure will be assumed at the affected analysis items', returnType{i}]);
+                            fprintf(fidType(i), ['-> Check the validity of the loading', returnType{i}]);
                             
                             if i == X
                                 setappdata(0, 'suppress_ID159', 1.0)
@@ -1994,6 +1995,19 @@ classdef messenger < handle
                             fprintf(fidType(i), ['-> Modification of the fatigue limit is enabled with the environment variable ''modifyEnduranceLimit''. Therefore, the fatigue limit may be reduced during the analysis, causing unexpected behaviour', returnType{i}]);
                             fprintf(fidType(i), ['-> Consult Section 7.8 of the Quick Fatigue Tool User Guide for additional guidance on this message', returnType{i}]);
                         end
+                    case 257.0
+                        if getappdata(0, 'suppress_ID257') == 0.0
+                            fprintf(fidType(i), [returnType{i}, '***WARNING: After applying the Morrow mean stress correction, the corrected fatigue strength coefficient (Sf'') is negative', returnType{i}]);
+                            fprintf(fidType(i), ['-> The Morrow mean stress correction is not defined for mean stress at or above the fatigue strength coefficient (Sf'')', returnType{i}]);
+                            fprintf(fidType(i), ['-> Non-fatigue failure will be assumed at the affected analysis items', returnType{i}]);
+                            fprintf(fidType(i), ['-> Check the validity of the loading', returnType{i}]);
+                            
+                            if i == X
+                                setappdata(0, 'suppress_ID257', 1.0)
+                            end
+                            
+                            setappdata(0, 'messageFileWarnings', 1.0)
+                        end
                 end
             end
         end
@@ -2020,6 +2034,7 @@ classdef messenger < handle
             setappdata(0, 'suppress_ID190', 0.0)
             setappdata(0, 'suppress_ID205', 0.0)
             setappdata(0, 'suppress_ID220', 0.0)
+            setappdata(0, 'suppress_ID257', 0.0)
         end
         
         %% WRITE LOG FILE

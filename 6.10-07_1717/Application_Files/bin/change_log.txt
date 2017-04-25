@@ -34,3 +34,10 @@ FOR A COMPLETE LIST OF CHANGES, PLEASE CONTACT THE AUTHOR
 
 22APR17
 The FRF calculation now accounts for the value of RESIDUAL
+
+25APR17
+* Fixed a bug where the hotspot file would not be processed
+  [REGRESSION SINCE 6.10-05]
+
+* Hotspos are how written to the output directory instead of the input
+  directory

@@ -1643,8 +1643,15 @@ classdef postProcess < handle
             % Concatenate data
             data = [hotspots; mainID(hotspots)'; subID(hotspots)'; nodalLife(hotspots)]';
             
+            % Check that the directory exists
+            root = getappdata(0, 'outputDirectory');
+            
+            if exist(sprintf('%s/Data Files', root), 'dir') == 0.0
+                mkdir(sprintf('%s/Data Files', root))
+            end
+            
             % Create the file
-            dir = ['Project/input/', sprintf('hotspots_%s.dat', jobName)];
+            dir = [pwd, sprintf('\\Project\\output\\%s\\Data Files\\', jobName), 'hotspots.dat'];
             fid = fopen(dir, 'w+');
             
             fprintf(fid, 'HOTSPOTS\r\n');
