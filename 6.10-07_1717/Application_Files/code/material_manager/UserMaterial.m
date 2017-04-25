@@ -1477,7 +1477,7 @@ catch
     % Don't tighten the axis
 end
 
-xlabel('Life (Nf)', 'FontSize', 16);    ylabel('Stress Amplitude (MPa)', 'FontSize', 16)
+xlabel('Cycles (Nf)', 'FontSize', 16);    ylabel('Stress Amplitude (MPa)', 'FontSize', 16)
 string = sprintf('S-N Data for %s', get(handles.edit_name, 'string'));
 title(string, 'FontSize', 18);   grid on
 
