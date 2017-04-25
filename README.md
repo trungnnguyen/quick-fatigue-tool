@@ -6,7 +6,7 @@ This is the GitHub repository for Quick Fatigue Tool v6. Feel free to clone or d
 ## Getting Started
 Preparing Quick Fatigue Tool requires minimal intervention from the user, although it is important to follow a few simple steps before running an analysis:
 
-1. Make sure the working directory is set to the root of the Quick Fatigue Tool directory, e.g. \..\Quick Fatigue Tool\6.x-yy. The directory structure is shown in Figure 2.1.
+1. Make sure the working directory is set to the root of the Quick Fatigue Tool directory, e.g. \..\Quick Fatigue Tool\6.x-yy.
 
 2. All folders and sub folders should be added to the MATLAB search path using the function addpath(), or by selecting the folders Application_Files and Project, right-clicking and selecting Add to Path → Selected Folders and Subfolders.
 
