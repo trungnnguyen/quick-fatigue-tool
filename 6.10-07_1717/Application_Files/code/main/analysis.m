@@ -6,7 +6,7 @@ classdef analysis < handle
 %   required to run this file.
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 15-Apr-2017 19:34:54 GMT
+%   Last modified 25-Apr-2017 12:13:25 GMT
     
     %%
     
@@ -732,24 +732,29 @@ classdef analysis < handle
             % Get the corrected stress amplitudes
             switch msCorrection
                 case 1.0 % Morrow
+                    Sf = getappdata(0, 'Sf');
+                    
                     if getappdata(0, 'useSN') == 0.0 && getappdata(0, 'algorithm') ~= 7.0
-                        morrowSf = getappdata(0, 'Sf') - Sm;
+                        morrowSf = Sf - Sm;
                         
                         % Check for negative values
                         for i = 1:length(Sm)
-                            if morrowSf(i) <= 0.0
+                            if morrowSf(i) < 0.0
                                 morrowSf(i) = 1e-06;
+                                
+                                % Warn the user
+                                messenger.writeMessage(257.0)
                             end
                         end
                         setappdata(0, 'morrowSf', morrowSf)
                         mscCycles = cycles;
                     else
-                        mscCycles = cycles.*((1.0 - ((Sm')./(getappdata(0, 'Sf')))).^-1.0);
+                        mscCycles = cycles.*((1.0 - ((Sm')./(Sf))).^-1.0);
                         
                         % Check for negative values
                         for i = 1:length(Sm)
-                            if mscCycles(i) <= 0.0
-                                mscCycles(i) = 1e-06;
+                            if mscCycles(i) < 0.0
+                                mscCycles(i) = Sf;
                                 
                                 % Warn the user
                                 messenger.writeMessage(159.0)
