@@ -11,7 +11,7 @@ classdef postProcess < handle
 %      10 Output
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 04-Apr-2017 13:26:59 GMT
+%   Last modified 09-May-2017 16:25:00 GMT
     
     %%
     
@@ -248,6 +248,8 @@ classdef postProcess < handle
         
         %% Write field output to file:
         function [] = exportFields(loadEqUnits, coldItems)
+            % Field output format string
+            f = getappdata(0, 'fieldFormatString');
             
             %{
                 FIELDS -> Single value per item
@@ -308,7 +310,8 @@ classdef postProcess < handle
                 fprintf(fid, 'FIELDS [WHOLE MODEL]\r\nJob:\t%s\r\nLoading:\t%.3g\t%s\r\n', getappdata(0, 'jobName'), getappdata(0, 'loadEqVal'), getappdata(0, 'loadEqUnits'));
                 
                 fprintf(fid, 'Main ID\tSub ID\tL (%s)\tLL (%s)\tD\tDDL\tFOS\tSFA\tFRFR\tFRFH\tFRFV\tFRFW\tSMAX (MPa)\tSMXP\tSMXU\tTRF\tWCM (MPa)\tWCA (MPa)\tWCATAN (Deg)\tWCDP (MPa)\tYIELD\r\n', loadEqUnits, loadEqUnits);
-                fprintf(fid, '%.0f\t%.0f\t%.4e\t%.4f\t%.4g\t%.4g\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.0f\r\n', data');
+                fprintf(fid, sprintf('%%.0f\t%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%.0f\r\n',...
+                    f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f), data');
                 
                 fclose(fid);
             end
@@ -380,7 +383,8 @@ classdef postProcess < handle
                     data_i = [mainID_i; subID_i; L_i; LL_i; D_i; DDL_i; FOS_i; SFA_i; FRFR_i; FRFH_i; FRFV_i; FRFW_i; SMAX_i; SMXP_i; SMXU_i; TRF_i; WCM_i; WCA_i; WCATAN_i; WCDP_i; YIELD_i]';
                     
                     fprintf(fid, 'Main ID\tSub ID\tL (%s)\tLL (%s)\tD\tDDL\tFOS\tSFA\tFRFR\tFRFH\tFRFV\tFRFW\tSMAX (MPa)\tSMXP\tSMXU\tTRF\tWCM (MPa)\tWCA (MPa)\tWCATAN (Deg)\tWCDP (MPa)\tYIELD\r\n', loadEqUnits, loadEqUnits);
-                    fprintf(fid, '%.0f\t%.0f\t%.4e\t%.4f\t%.4g\t%.4g\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.0f\r\n', data_i');
+                    fprintf(fid, sprintf('%%.0f\t%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%.0f\r\n',...
+                    f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f, f), data_i');
                     
                     fclose(fid);
                 end
@@ -389,7 +393,6 @@ classdef postProcess < handle
         
         %% Get history output from analysis:
         function [] = getHistories(algorithm, loadEqUnits, outputField, outputFigure, damageParameter, G)
-            
             figureFormat = getappdata(0, 'figureFormat');
             
             root = getappdata(0, 'outputDirectory');
@@ -1262,12 +1265,14 @@ classdef postProcess < handle
         
         %% Write history output to file:
         function [] = exportHistories(algorithm, loadEqUnits)
-        
+            % history output format string
+            h = getappdata(0, 'historyFormatString');
+            
             root = getappdata(0, 'outputDirectory');
             
             %{
-                LOAD HISTORIES -> Multiple values at worst item over all signal
-                increments
+                LOAD HISTORIES -> Multiple values at worst item over all
+                signal increments
             %}
             
             worstMainID = getappdata(0, 'worstMainID');
@@ -1297,14 +1302,14 @@ classdef postProcess < handle
                 fprintf(fid, 'Units:\tMPa\r\n');
                 
                 fprintf(fid, 'Load Increment\tVM\tPS1\tPS2\tPS3\tCN\tCS\r\n');
-                fprintf(fid, '%.0f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\r\n', data');
+                fprintf(fid, sprintf('%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\r\n', h, h, h, h, h, h), data');
                 
                 fclose(fid);
             end
             
             %{
-                CYCLE HISTORIES -> Worst cycle per item and all cycles at worst
-                item
+                CYCLE HISTORIES -> Worst cycle per item and all cycles at
+                worst item
             %}
             
             mainID = getappdata(0, 'mainID');
@@ -1352,21 +1357,20 @@ classdef postProcess < handle
                 fprintf(fid, 'Units:\tMPa\r\n');
                 
                 fprintf(fid, 'Item #\tMean stress\tStress Amplitude\t\tCycle #\tMean stress\tStress Amplitude\r\n');
-                
-                fprintf(fid, '%.0f.%.0f\t%.4f\t%.4f\t\t%.0f\t%.4f\t%.4f\r\n', [dataA(1.0:shortLength, :), dataB(1.0:shortLength, :)]');
+                fprintf(fid, sprintf('%%.0f.%%.0f\t%%%s\t%%%s\t\t%%%s\t%%%s\t%%%s\r\n', h, h, h, h, h), [dataA(1.0:shortLength, :), dataB(1.0:shortLength, :)]');
                 
                 if lengthA > lengthB
-                    fprintf(fid, '%.0f.%.0f\t%.4f\t%.4f\r\n', dataA(shortLength + 1.0:end, :)');
+                    fprintf(fid, sprintf('%%.0f.%%.0f\t%%%s\t%%%s\r\n', h, h), dataA(shortLength + 1.0:end, :)');
                 elseif lengthB > lengthA
-                    fprintf(fid, '\t\t\t\t%.0f\t%.4f\t%.4f\r\n', dataB(shortLength + 1.0:end, :)');
+                    fprintf(fid, sprintf('\t\t\t\t%%.0f\t%%%s\t%%%s\r\n', h, h), dataB(shortLength + 1.0:end, :)');
                 end
                 
                 fclose(fid);
             end
             
             %{
-                ANGLE HISTORIES -> Multiple values at worst item over all plane
-                orientations
+                ANGLE HISTORIES -> Multiple values at worst item over all
+                plane orientations
             %}
             
             if (algorithm < 7.0) && (algorithm ~= 3.0)
@@ -1400,7 +1404,7 @@ classdef postProcess < handle
                         fprintf(fid, 'Plane orientation (THETA-degrees)\tResultant shear stress (MPa)\tMaximum normal stress (MPa)\tDamage parameter (MPa)\tDamage\tLife (%s)\n', loadEqUnits);
                     end
                     
-                    fprintf(fid, '%.0f\t%.4f\t%.4f\t%.4f\t%.4e\t%.4e\r\n', data');
+                    fprintf(fid, sprintf('%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\r\n', h, h, h, h, h), data');
                     
                     fclose(fid);
                 end
@@ -1433,7 +1437,7 @@ classdef postProcess < handle
                 
                 fprintf(fid, 'Load Increment\tS11\tS22\tS33\tS12\tS13\tS23\r\n');
                 
-                fprintf(fid, '%.0f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\r\n', data');
+                fprintf(fid, sprintf('%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\r\n', h, h, h, h, h, h), data');
                 
                 fclose(fid);
             end

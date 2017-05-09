@@ -13,7 +13,7 @@ classdef algorithm_bs7608 < handle
 %      6.6 BS 7608 Fatigue of Welded Steel Joints
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 04-Apr-2017 13:26:59 GMT
+%   Last modified 09-May-2017 16:25:00 GMT
     
     %%
     
@@ -984,6 +984,8 @@ classdef algorithm_bs7608 < handle
         
         %% BS 7608 WRITE FIELD OUTPUT
         function [] = exportFields(loadEqUnits)
+            % Field output format string
+            f = getappdata(0, 'fieldFormatString');
             
             %{
                 FIELDS -> Single value per item
@@ -1018,7 +1020,8 @@ classdef algorithm_bs7608 < handle
                 fprintf(fid, 'FIELDS [WHOLE MODEL]\r\nJob:\t%s\r\nLoading:\t%.3g\t%s\r\n', getappdata(0, 'jobName'), getappdata(0, 'loadEqVal'), getappdata(0, 'loadEqUnits'));
                 
                 fprintf(fid, 'Main ID\tSub ID\tL (%s)\tLL (%s)\tD\tDDL\tSMAX (MPa)\tSMXP\tSMXU\tTRF\tWCM (MPa)\tWCA (MPa)\tWCATAN (Deg)\tWCDP (MPa)\tYIELD\r\n', loadEqUnits, loadEqUnits);
-                fprintf(fid, '%.0f\t%.0f\t%.4e\t%.4f\t%.4g\t%.4g\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\r\n', data');
+                fprintf(fid, sprintf('%%.0f\t%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%.0f\r\n',...
+                    f, f, f, f, f, f, f, f, f, f, f, f), data');
                 
                 fclose(fid);
             end
@@ -1604,12 +1607,14 @@ classdef algorithm_bs7608 < handle
         
         %% BS 7608 WRITE HISTORY OUTPUT
         function [] = exportHistories(loadEqUnits)
+            % history output format string
+            h = getappdata(0, 'historyFormatString');
         
             root = getappdata(0, 'outputDirectory');
             
             %{
-                LOAD HISTORIES -> Multiple values at worst item over all signal
-                increments
+                LOAD HISTORIES -> Multiple values at worst item over all
+                signal increments
             %}
             
             worstMainID = getappdata(0, 'worstMainID');
@@ -1639,14 +1644,14 @@ classdef algorithm_bs7608 < handle
                 fprintf(fid, 'Units:\tMPa\r\n');
                 
                 fprintf(fid, 'Load Increment\tVM\tPS1\tPS2\tPS3\tCN\tCS\r\n');
-                fprintf(fid, '%.0f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\r\n', data');
+                fprintf(fid, sprintf('%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\r\n', h, h, h, h, h, h), data');
                 
                 fclose(fid);
             end
             
             %{
-                ANGLE HISTORIES -> Multiple values at worst item over all plane
-                orientations
+                ANGLE HISTORIES -> Multiple values at worst item over all
+                plane orientations
             %}
             steps = getappdata(0, 'stepSize');
             step = steps(getappdata(0, 'worstItem'));
@@ -1678,7 +1683,7 @@ classdef algorithm_bs7608 < handle
                     fprintf(fid, 'Plane orientation (THETA-degrees)\tResultant shear stress (MPa)\tMaximum normal stress (MPa)\tDamage parameter (MPa)\tDamage\tLife (%s)\n', loadEqUnits);
                 end
                 
-                fprintf(fid, '%.0f\t%.4f\t%.4f\t%.4f\t%.4e\t%.4e\r\n', data');
+                fprintf(fid, sprintf('%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\r\n', h, h, h, h, h), data');
                 
                 fclose(fid);
             end
@@ -1710,7 +1715,7 @@ classdef algorithm_bs7608 < handle
                 
                 fprintf(fid, 'Load Increment\tS11\tS22\tS33\tS12\tS13\tS23\r\n');
                 
-                fprintf(fid, '%.0f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\t%.4f\r\n', data');
+                fprintf(fid, sprintf('%%.0f\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\t%%%s\r\n', h, h, h, h, h, h), data');
                 
                 fclose(fid);
             end

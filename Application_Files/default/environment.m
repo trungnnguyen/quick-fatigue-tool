@@ -13,7 +13,7 @@
 %      2 Environment variables
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 19-Apr-2017 14:29:55 GMT
+%   Last modified 09-May-2017 16:25:00 GMT
 
 %% GATE TENSORS
 %{
@@ -375,6 +375,10 @@ setappdata(0, 'file_H_OUTPUT_LOAD', 1.0)
 setappdata(0, 'file_H_OUTPUT_CYCLE', 1.0)
 setappdata(0, 'file_H_OUTPUT_ANGLE', 1.0)
 setappdata(0, 'file_H_OUTPUT_TENSOR', 1.0)
+
+% OUTPUT FORMAT STRING
+setappdata(0, 'fieldFormatString', 'f')
+setappdata(0, 'historyFormatString', 'f')
 
 % COMMAND WINDOW OUTPUT
 setappdata(0, 'echoMessagesToCWIN', 0.0)
