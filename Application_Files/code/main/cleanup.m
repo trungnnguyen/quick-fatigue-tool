@@ -36,6 +36,13 @@ setappdata(0, 'twops', [])
 setappdata(0, 'TfPrime', [])
 setappdata(0, 'Tfs', [])
 
+%% Close the status file
+fid_status = getappdata(0, 'fid_status');
+try %#ok<TRYNC>
+    fprintf(fid_status, '\r\n\r\nTHE ANALYSIS HAS NOT BEEN COMPLETED');
+    fclose(fid_status);
+end
+
 %% If the analysis exited with errors, create error log
 if status == 1.0
     % Create an error log file

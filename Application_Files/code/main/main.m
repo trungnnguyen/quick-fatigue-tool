@@ -76,6 +76,7 @@ end
 % Open status file for writing
 fileName = sprintf('Project/output/%s/%s.sta', jobName, jobName);
 fid_status = fopen(fileName, 'w+');
+setappdata(0, 'fid_status', fid_status)
 c = clock;
 fprintf(fid_status, '[NOTICE] Quick Fatigue Tool 6.10-07\t%s', datestr(datenum(c(1.0), c(2.0), c(3.0), c(4.0), c(5.0), c(6.0))));
 
@@ -471,7 +472,7 @@ if getappdata(0, 'dataCheck') > 0.0
 	setappdata(0, 'dataCheck_time', toc(tic_dataCheck))
 	fprintf('\n[NOTICE] Data Check complete (%fs)\n', toc(tic_dataCheck))
     messenger.writeMessage(-999.0)
-    fprintf(fid_status, '\n[NOTICE] END OF FILE');
+    fprintf(fid_status, '\r\n\r\nTHE ANALYSIS HAS COMPLETED SUCCESSFULLY');
     fclose(fid_status);
     return
 end
@@ -1027,7 +1028,7 @@ if any(debugItems == totalCounter) == 1.0
 end
 
 %% CLOSE THE STATUS FILE
-fprintf(fid_status, '\n[NOTICE] END OF FILE');
+fprintf(fid_status, '\r\n\r\nTHE ANALYSIS HAS COMPLETED SUCCESSFULLY');
 fclose(fid_status);
 
 %% REMOVE APPDATA
