@@ -85,8 +85,8 @@ fprintf(fid_status, '\n[NOTICE] The job file "%s.m" has been submitted for analy
 
 % Advise user is verbose output is not requested
 if getappdata(0, 'echoMessagesToCWIN') == 0.0
-    fprintf('\n[NOTICE] Analysis-related messages can be printed to the command window by setting echoMessagesToCWIN = 1.0 in the environment file')
-    fprintf(fid_status, '\n[NOTICE] Analysis-related messages can be printed to the command window by setting echoMessagesToCWIN = 1.0 in the environment file');
+    fprintf('\n[NOTICE] Analysis-related messages can be printed to the command window by\n         setting echoMessagesToCWIN = 1.0 in the environment file')
+    fprintf(fid_status, '\n[NOTICE] Analysis-related messages can be printed to the command window by\n         setting echoMessagesToCWIN = 1.0 in the environment file');
 end
 
 %% Unsuppress message IDs

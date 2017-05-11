@@ -1497,7 +1497,7 @@ classdef messenger < handle
                             if elementType == 0.0
                                 fprintf(fidType(i), ['-> The results at these locations are assumed to be 3D stress at an unknown element position, based on the value of PLANE_STRESS = 0.0 in the job file', returnType{i}]);
                                 fprintf(fidType(i), ['-> If the model contains plane stress elements with results at element-nodal or integration point element positions, it is likely that they have been incorrectly identified as 3D stress', returnType{i}]);
-                                fprintf(fidType(i), ['-> If this is the case, set PLANE_STRESS = 1.0 to correctly resolve the ambiguity', returnType{i}]);
+                                fprintf(fidType(i), ['-> If this is the case, set PLANE_STRESS = 1.0 to resolve the ambiguity', returnType{i}]);
                             else
                                 fprintf(fidType(i), ['-> The results at these locations are assumed to be plane stress at element-nodal or integration point element positions, based on the value of PLANE_STRESS = 1.0 in the job file', returnType{i}]);
                                 fprintf(fidType(i), ['-> If the model does not contain plane stress elements, set PLANE_STRESS = 0.0 to correctly resolve the ambiguity. The ambiguous region(s) will be interpreted as 3D stress at an unknown element position', returnType{i}]);
