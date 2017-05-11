@@ -1,7 +1,8 @@
 # Quick Fatigue Tool for MATLAB
 Stress-based multiaxial fatigue analysis application for MATLAB
 
-This is the GitHub repository for Quick Fatigue Tool v6. Feel free to clone or download the code at your leisure. For a detailed description of the code, please refer to the Quick Fatigue Tool User Guide, which is found in quick-fatigue-tool/Documentation.
+This is the GitHub repository for Quick Fatigue Tool v6. Feel free to clone or download the code at your leisure. For a detailed description of the code, please refer to the Quick Fatigue Tool User Guide, which is found in
+quick-fatigue-tool/Documentation.
 
 ## Getting Started
 Preparing Quick Fatigue Tool requires minimal intervention from the user, although it is important to follow a few simple steps before running an analysis:
