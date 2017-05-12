@@ -13,7 +13,7 @@ classdef algorithm_usl < handle
 %      6.7 Uniaxial Stress-Life
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 04-Apr-2017 13:26:59 GMT
+%   Last modified 12-May-2017 15:25:52 GMT
     
     %%
     
@@ -148,17 +148,19 @@ classdef algorithm_usl < handle
                         continue
                     end
                     
+                    %{
+                        If the mean stress was too large, report infinite
+                        damage
+                    %}
+                    if mscWarning == 1.0 && any(overflowCycles == index) == 1.0
+                        cumulativeDamage(index) = inf;
+                        continue
+                    end
+                    
                     % Modify the endurance limit if applicable
                     [fatigueLimit, zeroDamage] = analysis.modifyEnduranceLimit(modifyEnduranceLimit, ndEndurance, fatigueLimit, fatigueLimit_original, cycles(index), cyclesToRecover, residualStress, enduranceScale);
                     if (zeroDamage == 1.0) && (kt == 1.0)
                         cumulativeDamage(index) = 0.0;
-                        continue
-                    end
-                    
-                    % If the mean stress was too large, report infinite
-                    % damage
-                    if mscWarning == 1.0 && any(overflowCycles == index) == 1.0
-                        cumulativeDamage(index) = inf;
                         continue
                     end
                     

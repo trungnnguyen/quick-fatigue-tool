@@ -11,7 +11,7 @@ function [] = main(flags)
 %   Author contact: louisvallance@hotmail.co.uk
 %
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 25-Apr-2017 12:13:25 GMT
+%   Last modified 12-May-2017 15:25:52 GMT
 
 % Begin main code - DO NOT EDIT
 format long;    clc;    warning('off', 'all')
@@ -35,7 +35,7 @@ end
 if error == 1.0
     return
 end
-	
+
 %% TIMER FOR DATA CHECK ANALYSIS
 if getappdata(0, 'dataCheck') > 0.0
     tic_dataCheck = tic;
@@ -48,7 +48,7 @@ setappdata(0, 'messageFileWarnings', 0.0)
 %% PRINT COMMAND WINDOW HEADER
 fprintf('[NOTICE] Quick Fatigue Tool 6.10-07')
 fprintf('\n[NOTICE] (Copyright Louis Vallance 2017)')
-fprintf('\n[NOTICE] Last modified 25-Apr-2017 12:13:25 GMT')
+fprintf('\n[NOTICE] Last modified 12-May-2017 15:25:52 GMT')
 
 cleanExit = 0.0;
 
@@ -267,14 +267,14 @@ end
 %% ISOLATE THE LARGEST (S1-S3) ITEM IF APPLICABLE
 if (strcmpi(getappdata(0, 'items'), 'peek') == 1.0) && (N > 1.0)
     [Sxx, Syy, Szz, Txy, Tyz, Txz, mainID, subID, peekGroup, vonMises, error] = preProcess.peekAtNode(Sxx, Syy, Szz, Txy, Tyz, Txz, mainID, subID);
-    
+
     if error == 1.0
         cleanup(1.0)
         return
     elseif algorithm == 7.0
         stressInvParam = getappdata(0, 'stressInvParam');
     end
-    
+
     N = 1.0;
     peekAnalysis = 1.0;
     setappdata(0, 'peekAnalysis', 1.0)
@@ -296,13 +296,13 @@ if (algorithm ~= 3.0) && (algorithm ~= 8.0)
     if (nodalElimination > 0.0) && (N > 1.0)
         fprintf('\n[PRE] Optimizing datasets')
         fprintf(fid_status, '\n[PRE] Optimizing datasets');
-        
+
         [coldItems, removedItems, hotspotWarning] = preProcess.nodalElimination(algorithm,...
             nlMaterial, msCorrection, N);
-        
+
         setappdata(0, 'separateFieldOutput', 1.0)
         messenger.writeMessage(22.0)
-        
+
         %{
             Check if individual group items were eliminated. If so, inform
             the user
@@ -320,11 +320,11 @@ else
     if nodalElimination > 0.0 && algorithm == 8.0
         messenger.writeMessage(20.0)
     end
-    
+
     if nodalElimination > 0.0 && algorithm == 3.0
         messenger.writeMessage(21.0)
     end
-    
+
     coldItems = [];
     hotspotWarning = 0.0;
     removedItems = 0.0;
@@ -367,7 +367,7 @@ setappdata(0, 'planePrecision', planePrecision)
 if getappdata(0, 'checkLoadProportionality') == 1.0 && (algorithm ~= 3.0 && algorithm ~= 7.0 && algorithm ~= 9.0 && algorithm ~= 6.0)
     fprintf('\n[PRE] Performing load proportionality checks')
     fprintf(fid_status, '\n[PRE] Performing load proportionality checks');
-    
+
     [step, planePrecision] = preProcess.getLoadProportionality(Sxx, Syy, N, step, planePrecision, getappdata(0, 'proportionalityTolerance'));
 end
 
@@ -454,7 +454,7 @@ if peekAnalysis == 1.0
         group, save the original number of groups
     %}
     setappdata(0, 'numberOfGroupsPeek', G)
-    
+
     G = 1.0;
     setappdata(0, 'numberOfGroups', 1.0)
 end
@@ -468,7 +468,7 @@ if getappdata(0, 'dataCheck') > 0.0
     if outputField == 1.0
         printTensor(Sxx, Syy, Szz, Txy, Tyz, Txz)
     end
-    
+
 	setappdata(0, 'dataCheck_time', toc(tic_dataCheck))
 	fprintf('\n[NOTICE] Data Check complete (%fs)\n', toc(tic_dataCheck))
     messenger.writeMessage(-999.0)
@@ -519,21 +519,21 @@ stressInvParamType = getappdata(0, 'stressInvariantParameter');
 nasalifeParameter = getappdata(0, 'nasalifeParameter');
 
 for groups = 1:G
-    %{ 
+    %{
         If the analysis is a PEEK analysis, override the value of GROUP to
         the group containing the PEEK item
     %}
     if peekAnalysis == 1.0
         groups = peekGroup; %#ok<FXSET>
     end
-    
+
     if strcmpi(groupIDBuffer(1.0).name, 'default') == 1.0
         % There is one, default group
         groupIDs = linspace(1.0, N, N);
     else
         % Assign group parameters to the current set of analysis IDs
         [N, groupIDs] = group.switchProperties(groups, groupIDBuffer(groups));
-        
+
         %{
             If N == 0.0, there are no items in the current group to
             analyse. Move on to the next group
@@ -542,17 +542,17 @@ for groups = 1:G
             continue
         end
     end
-    
+
     % Initialize the group nodal damage buffer
     groupNodalDamage = zeros(1.0, N);
-    
+
     % Save the current group number
     setappdata(0, 'getMaterial_currentGroup', groups)
-    
+
     for item = 1:N
         % Update the counter
         totalCounter = totalCounter + 1.0;
-        
+
         % Save workspace to file
         if any(debugItems == totalCounter) == 1.0
             if cacheOverlay == 1.0
@@ -560,45 +560,45 @@ for groups = 1:G
             else
                 fileName = sprintf('qft_data_%.0f.mat', totalCounter);
             end
-            
+
             % Save variables
             save(sprintf('%s/Project/output/%s/Data Files/%s', pwd, jobName, fileName))
-            
+
             % Save %APPDATA%
             APPDATA = getappdata(0.0); %#ok<NASGU>
             save(sprintf('%s/Project/output/%s/Data Files/%s', pwd, jobName, fileName), 'APPDATA', '-append')
         end
-        
+
         %{
             If groups are being used, convert the current item number to
             the current item ID in the current group
         %}
         groupItem = groupIDs(item);
-        
+
         % Skip items which have been eliminated from the analysis
         if any(totalCounter == coldItems) == 1.0
             % Set damage to zero
             nodalDamage(totalCounter) = 0.0;
-            
+
             % Store worst cycles for current item
             nodalAmplitudes{totalCounter} = 0.0;
             nodalPairs{totalCounter} = [0.0, 0.0];
             continue
         end
-        
+
         % Number of items analysed so far
         analysedNodes = analysedNodes + 1.0;
-        
+
         % Get the stress history for the current analysis item
         Sxxi = Sxx(groupItem, :);   Syyi = Syy(groupItem, :);   Szzi = Szz(groupItem, :);
         Txyi = Txy(groupItem, :);   Tyzi = Tyz(groupItem, :);   Txzi = Txz(groupItem, :);
-        
+
         % Get the principal stress history at the current item
         s1i = s1(totalCounter, :);  s2i = s2(totalCounter, :);  s3i = s3(totalCounter, :);
-        
+
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %%%%%%%%%%%%%%%%%%%%%%FATIGUE ANALYSIS ALGORITHM%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         switch algorithm
             case 3.0 % UNIAXIAL STRESS-LIFE
                 [nodalAmplitudes, nodalPairs, nodalDamage, nodalDamageParameter, damageParameter]...
@@ -636,7 +636,7 @@ for groups = 1:G
             case 7.0 % STRESS INVARIANT PARAMETER
                 % Get the von Mises stress at the current item
                 stressInvParam_i = stressInvParam(totalCounter, :);
-                
+
                 [nodalAmplitudes, nodalPairs, nodalDamage, nodalDamageParameter]...
                     = algorithm_sip.main(s1i, s2i, s3i, signalLength, totalCounter,...
                     nodalDamage, msCorrection, nodalAmplitudes, nodalPairs,...
@@ -656,33 +656,33 @@ for groups = 1:G
             case 9.0 % NASALIFE
                 % Get the von Mises stress at the current item
                 vonMises_i = vonMises(totalCounter, :);
-                
+
                 [nodalAmplitudes, nodalPairs, nodalDamage, nodalDamageParameter]...
                     = algorithm_nasa.main(Sxxi, Syyi, Szzi, Txyi, Tyzi, Txzi, signalLength,...
                     totalCounter, nodalDamage, nodalAmplitudes, nodalPairs, nodalDamageParameter,...
                     s1i, s2i, s3i, signConvention, gateTensors, tensorGate, vonMises_i, nasalifeParameter);
             otherwise
         end
-        
+
         %%%%%%%%%%%%%%%%%%%%%%FATIGUE ANALYSIS ALGORITHM%%%%%%%%%%%%%%%%%%%%%%%
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         % If user S-N data was used without extrapolation, check for NaN damage values
         if (useSN == 1.0) && any(isnan(nodalDamage))
             setappdata(0, 'E008', 1.0)
-            
+
             cleanup(1.0)
             return
         end
-        
+
         % Save the damage at the current node in the current group
         groupNodalDamage(item) = nodalDamage(totalCounter);
-        
+
         % REPORT PROGRESS
         [reported, x] = status(fid_status, analysedNodes, totalCounter, N2, nodalDamage, mainID, subID,...
             reported, x0, x);
     end
-    
+
     % Save the worst damage for the current group
     groupWorstLife(groups) = 1.0./max(groupNodalDamage);
 end
@@ -709,13 +709,13 @@ subID_master = getappdata(0,'subID_master');
 if G > 1.0
     mainID_groupAll = getappdata(0, 'mainID_groupAll');
     subID_groupAll = getappdata(0, 'subID_groupAll');
-    
+
     if isempty(mainID_groupAll) == 1.0 || isempty(subID_groupAll) == 1.0
         worstAnalysisItem_original = worstAnalysisItem;
         setappdata(0, 'worstAnalysisItem_original', worstAnalysisItem_original)
     else
         worstAnalysisItem_original = zeros(1.0, length(worstAnalysisItem));
-        
+
         for i = 1:length(worstAnalysisItem)
             %{
                 Find the index of the original ID list at which the worst
@@ -723,7 +723,7 @@ if G > 1.0
             %}
             x1 = find(mainID_master == mainID_groupAll(worstAnalysisItem(i)));
             x2 = find(subID_master == subID_groupAll(worstAnalysisItem(i)));
-            
+
             if (isempty(x1) == 1.0) || (isempty(x2) == 1.0)
                 worstAnalysisItem_original = worstAnalysisItem;
             else
@@ -733,12 +733,12 @@ if G > 1.0
         end
         worstAnalysisItem_original = worstAnalysisItem_original(1.0);
     end
-    
+
     setappdata(0, 'worstAnalysisItem_original', worstAnalysisItem_original)
 else
     worstAnalysisItem_original = worstAnalysisItem;
-    worstAnalysisItem_original = worstAnalysisItem_original(1.0);
     setappdata(0, 'worstAnalysisItem_original', worstAnalysisItem_original)
+    worstAnalysisItem_original = worstAnalysisItem_original(1.0);
 end
 messenger.writeMessage(18.0)
 
@@ -748,7 +748,7 @@ if length(worstAnalysisItem) > 1.0
         the largest stress
     %}
     maximumStressItem = postProcess.getMaximumStress();
-    
+
     %{
         If the item with the largest stress does not coincide with any of
         the reported worst analysis items, take the first item in the list
@@ -758,7 +758,7 @@ if length(worstAnalysisItem) > 1.0
     else
         worstAnalysisItem = worstAnalysisItem(worstAnalysisItem == maximumStressItem);
     end
-    
+
     % The item with the largest stress no longer needs to be calculated
     setappdata(0, 'skipMaximumStressCalculation', 1.0)
 else
@@ -836,7 +836,7 @@ end
 if (outputHistory == 1.0) || (outputField == 1.0) || (outputFigure == 1.0)
     fprintf('\n[POST] Calculating worst item output')
     fprintf(fid_status, '\n[POST] Calculating worst item output');
-    
+
     switch algorithm
         case 3.0 % UNIAXIAL STRESS-LIFE
             algorithm_usl.worstItemAnalysis(signalLength, msCorrection,...
@@ -919,20 +919,20 @@ if outputField == 1.0
     %% CALCULATE FIELD OUTPUT
     fprintf('\n[POST] Writing field output')
     fprintf(fid_status, '\n[POST] Writing field output');
-    
+
     if algorithm == 8.0
         algorithm_bs7608.getFields()
     else
         postProcess.getFields(algorithm, msCorrection, gateTensors, tensorGate, coldItems, fid_status)
     end
-    
+
     %% EXPORT FIELDS
     if algorithm == 8.0
         algorithm_bs7608.exportFields(loadEqUnits)
     else
         postProcess.exportFields(loadEqUnits, coldItems)
     end
-    
+
     messenger.writeMessage(141.0)
 end
 
@@ -940,13 +940,13 @@ if (outputHistory == 1.0) || (outputFigure == 1.0)
     %% CALCULATE HISTORY OUTPUT
     fprintf('\n[POST] Writing history output')
     fprintf(fid_status, '\n[POST] Writing history output');
-    
+
     if algorithm == 8.0
         algorithm_bs7608.getHistories(loadEqUnits, outputField, outputFigure)
     else
         postProcess.getHistories(algorithm, loadEqUnits, outputField, outputFigure, damageParameter, G)
     end
-    
+
     if outputHistory == 1.0
         %% EXPORT HISTORIES
         if algorithm == 8.0
@@ -954,10 +954,10 @@ if (outputHistory == 1.0) || (outputFigure == 1.0)
         else
             postProcess.exportHistories(algorithm, loadEqUnits)
         end
-        
+
         messenger.writeMessage(140.0)
     end
-    
+
     if outputFigure == 1.0
         messenger.writeMessage(142.0)
     end
@@ -971,7 +971,7 @@ messenger.writeMessage(65.0)
 
 if any(L < 1e6)
     postProcess.writeLCFItems(L, jobName, mainID, subID, loadEqUnits)
-    
+
     if any(L < 1.0)
         postProcess.writeOverflowItems(nodalDamage, jobName, mainID, subID)
     end
@@ -1018,10 +1018,10 @@ if any(debugItems == totalCounter) == 1.0
     else
         fileName = sprintf('qft_data_%.0f.mat', totalCounter);
     end
-    
+
     % Save variables
     save(sprintf('%s/Project/output/%s/Data Files/%s', pwd, jobName, fileName))
-    
+
     % Save %APPDATA%
     APPDATA = getappdata(0.0); %#ok<NASGU>
     save(sprintf('%s/Project/output/%s/Data Files/%s', pwd, jobName, fileName), 'APPDATA', '-append')

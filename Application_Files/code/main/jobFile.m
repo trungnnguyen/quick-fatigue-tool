@@ -1684,8 +1684,10 @@ classdef jobFile < handle
             end
             
             %% COLLAPSE LOAD HISTORY (IF APPLICABLE)
-            if (length(Sxx) > 3.0) && (gateHistories == 1.0)
-                [Sxx, Syy, Szz, Txy, Txz, Tyz] = constantAmplitude(Sxx, Syy, Szz, Txy, Txz, Tyz, repeats, historyGate);
+            [~, nPoints] = size(Sxx);
+            
+            if (nPoints > 3.0) && (gateHistories == 1.0)
+                [Sxx, Syy, Szz, Txy, Txz, Tyz] = constantAmplitude(Sxx, Syy, Szz, Txy, Txz, Tyz, repeats, historyGate, nPoints);
             end
             
             %% Save stress tensors in the appdata

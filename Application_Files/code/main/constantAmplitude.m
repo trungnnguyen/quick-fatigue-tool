@@ -1,4 +1,4 @@
-function [Sxx, Syy, Szz, Txy, Txz, Tyz] = constantAmplitude(Sxx, Syy, Szz, Txy, Txz, Tyz, repeats, historyGate)
+function [Sxx, Syy, Szz, Txy, Txz, Tyz] = constantAmplitude(Sxx, Syy, Szz, Txy, Txz, Tyz, repeats, historyGate, originalLength)
 %CONSTANTAMPLITUDE    QFT function to check for constant amplitude loading.
 %   This function checks if a load history is constant amplitude.
 %   
@@ -11,19 +11,21 @@ function [Sxx, Syy, Szz, Txy, Txz, Tyz] = constantAmplitude(Sxx, Syy, Szz, Txy, 
     %%
     
 gate = historyGate(1.0)/100;
-originalLength = length(Sxx);
+
+% It is only necessary to consider the first item
+Sxx_i = Sxx(1.0, :);
 
 %{
 	If the load history is constant amplitude, reduce the
 	history to a single cycle and update the number of repeats
 %}
-uniques = Sxx(1.0);
-if ismember(Sxx(2.0), uniques) == 0.0
-    uniques = [uniques, Sxx(2.0)];
+uniques = Sxx_i(1.0);
+if ismember(Sxx_i(2.0), uniques) == 0.0
+    uniques = [uniques, Sxx_i(1.0)];
 end
 
-for i = 3:length(Sxx)
-    ratio = abs(Sxx(i)/Sxx(i - 2.0));
+for i = 3:length(Sxx_i)
+    ratio = abs(Sxx_i(i)/Sxx_i(i - 2.0));
     if ratio > 1.0
         ratio = ratio - 1.0;
     elseif ratio < 1.0
@@ -33,19 +35,19 @@ for i = 3:length(Sxx)
     end
     
     if ratio > gate
-        uniques = [uniques, Sxx(i)]; %#ok<AGROW>
+        uniques = [uniques, Sxx_i(i)]; %#ok<AGROW>
     end
 end
 
 if length(uniques) < 3.0
     % Constant amplitude loading detected
-    Sxx = Sxx(1.0:2.0);
-    Syy = Syy(1.0:2.0);
-    Szz = Szz(1.0:2.0);
-    Txy = Txy(1.0:2.0);
-    Txz = Txz(1.0:2.0);
-    Tyz = Tyz(1.0:2.0);
-    extraRepeats = floor(originalLength/length(Sxx));
+    Sxx = Sxx(:, 1.0:2.0);
+    Syy = Syy(:, 1.0:2.0);
+    Szz = Szz(:, 1.0:2.0);
+    Txy = Txy(:, 1.0:2.0);
+    Txz = Txz(:, 1.0:2.0);
+    Tyz = Tyz(:, 1.0:2.0);
+    extraRepeats = floor(originalLength/2.0);
     repeats = repeats*extraRepeats;
     
     setappdata(0, 'repeats', repeats)

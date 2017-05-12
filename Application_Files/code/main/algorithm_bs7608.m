@@ -13,7 +13,7 @@ classdef algorithm_bs7608 < handle
 %      6.6 BS 7608 Fatigue of Welded Steel Joints
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 09-May-2017 16:25:00 GMT
+%   Last modified 12-May-2017 15:25:52 GMT
     
     %%
     

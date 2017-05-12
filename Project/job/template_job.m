@@ -17,7 +17,7 @@ function [] = template_job()
 %      1 Job file options
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 19-Apr-2017 14:29:55 GMT
+%   Last modified 12-May-2017 15:25:52 GMT
 
 %% JOB
 
@@ -213,7 +213,7 @@ OUTPUT_FIGURE = 1.0;
 %% ABAQUS ODB INTERFACE
 
 % ASSOCIATE THE JOB WITH AN ABAQUS OUTPUT DATABASE (.ODB) FILE
-OUTPUT_DATABASE = [];
+OUTPUT_DATABASE = '';
 
 PART_INSTANCE = 'PART-1-1';
 

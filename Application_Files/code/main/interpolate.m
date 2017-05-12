@@ -12,7 +12,7 @@ function [cumulativeDamage] = interpolate(cumulativeDamage, pairs, msCorrection,
 %      5.4 Using custom stress-life data
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 04-Apr-2017 13:26:59 GMT
+%   Last modified 12-May-2017 15:25:52 GMT
     
     %%
     
@@ -71,17 +71,16 @@ if (sets == 1.0) || (sets > 1.0 && msCorrection ~= 7.0)
             continue
         end
         
+        % If the mean stress was too large, report infinite damage
+        if mscWarning == 1.0 && any(overflowCycles == index) == 1.0
+            cumulativeDamage(index) = inf;
+            continue
+        end
+        
         % Modify the endurance limit if applicable
         [fatigueLimit, zeroDamage] = analysis.modifyEnduranceLimit(modifyEnduranceLimit, ndEndurance, fatigueLimit, fatigueLimit_original, cycles(index), cyclesToRecover, residualStress, enduranceScale);
         if (zeroDamage == 1.0) && (kt == 1.0)
             cumulativeDamage(index) = 0.0;
-            continue
-        end
-        
-        % If the mean stress was too large, report infinite
-        % damage
-        if mscWarning == 1.0 && any(overflowCycles == index) == 1.0
-            cumulativeDamage(index) = inf;
             continue
         end
         

@@ -7,7 +7,7 @@ classdef messenger < handle
 %   required to run this file.
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 25-Apr-2017 12:13:25 GMT
+%   Last modified 12-May-2017 15:25:52 GMT
     
     %%
     
@@ -172,6 +172,13 @@ classdef messenger < handle
                         if getappdata(0, 'twops_status') == 1.0
                             fprintf(fidType(i), [returnType{i}, '***NOTE: The proof stress for material %s (group %.0f) was not specified', returnType{i}], getappdata(0, 'getMaterial_currentMaterial'), getappdata(0, 'getMaterial_currentGroup'));
                             fprintf(fidType(i), ['-> A derived value of %.4gMPa will be used', returnType{i}], getappdata(0, 'twops'));
+                            
+                            if getappdata(0, 'modifiedGoodman') == 1.0
+                                fprintf(fidType(i), [returnType{i}, '***WARNING: The modified Goodman mean stress correction is enabled', returnType{i}]);
+                                fprintf(fidType(i), ['-> Derived values of the proof stress may lead to unrealistic damage values when used with this algorithm', returnType{i}]);
+                                
+                                setappdata(0, 'messageFileWarnings', 1.0)
+                            end
                             
                             setappdata(0, 'messageFileNotes', 1.0)
                         elseif getappdata(0, 'twops_status') == -1.0
