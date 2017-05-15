@@ -6,7 +6,7 @@ function [] = cleanup(status)
 %   is not required to run this file.
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 12-May-2017 15:25:52 GMT
+%   Last modified 15-May-2017 08:49:00 GMT
     
     %%
     
@@ -72,7 +72,7 @@ if status == 1.0
     % Write file header
     fprintf(fid, 'Quick Fatigue Tool 6.10-07\r\n');
     fprintf(fid, '(Copyright Louis Vallance 2017)\r\n');
-    fprintf(fid, 'Last modified 12-May-2017 15:25:52 GMT\r\n\r\n');
+    fprintf(fid, 'Last modified 15-May-2017 08:49:00 GMT\r\n\r\n');
     
     % Continue writing the file
     fprintf(fid, 'THE ANALYSIS WAS ABORTED FOR THE FOLLOWING REASON(S):');
@@ -1340,9 +1340,9 @@ if status == 1.0
     
     % Prompt user if they would like to view the analysis log
     if (ispc == 1.0) && (ismac == 0.0)
-        answer = questdlg('The analysis exited with and error - Please see the log file for more information.', 'Quick Fatigue Tool', 'View log', 'Close', 'View log');
+        answer = questdlg('The analysis exited with an error - Please see the log file for more information.', 'Quick Fatigue Tool', 'View log', 'Close', 'View log');
     elseif (ispc == 0.0) && (ismac == 1.0)
-        answer = errordlg('The analysis exited with and error - Please see the log file for more information.', 'Quick Fatigue Tool');
+        answer = errordlg('The analysis exited with an error - Please see the log file for more information.', 'Quick Fatigue Tool');
     else
         answer = -1.0;
     end
