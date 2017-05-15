@@ -8,7 +8,7 @@ classdef preProcess < handle
 %   See also postProcess.
 %   
 %   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 07-Apr-2017 14:38:24 GMT
+%   Last modified 15-May-2017 08:49:00 GMT
     
     %%
     
@@ -4721,8 +4721,16 @@ classdef preProcess < handle
             
             % Read the local environment file if it exists
             if exist(sprintf('Project/job/%s_env.m', jobName), 'file') == 2.0
-                run(sprintf('%s_env', jobName))
-                setappdata(0, 'message169_environmentFileName', [pwd, sprintf('\\Project\\job\\%s_env.m', jobName)])
+                try
+                    run(sprintf('%s_env', jobName))
+                    setappdata(0, 'message169_environmentFileName', [pwd, sprintf('\\Project\\job\\%s_env.m', jobName)])
+                catch
+                    % The local environment file could not be read
+                    error = 1.0;
+                    fprintf('ERROR: The local environment file could not be read\n');
+                    fprintf('-> Make sure the job name does not contain spaces or illegal characters\n');
+                    return
+                end
             end
             
             % Check that the environment is defined
