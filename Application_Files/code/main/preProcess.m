@@ -3085,8 +3085,10 @@ classdef preProcess < handle
                             
                             try
                                 y = ktData(:, ktCurve_i + 1.0);
-                                % If the UTS exceeds the range of UTS values, take
-                                % the last Kt value
+                                %{
+                                    If the UTS exceeds the range of UTS
+                                    values, take the last Kt value
+                                %}
                                 if uts > x(end)
                                     setappdata(0, 'kt', y(end))
                                     messenger.writeMessage(42.0)
@@ -3106,8 +3108,10 @@ classdef preProcess < handle
                             % Get Rz values
                             Rz = ktData(1.0, 1.0:end - 1.0);
                             
-                            % If the user Rz value is not in range, take the
-                            % end Kt values
+                            %{
+                                If the user Rz value is not in range, take
+                                the end Kt values
+                            %}
                             if ktCurve_i < Rz(1.0)
                                 setappdata(0, 'kt', 1.0)
                                 messenger.writeMessage(178.0)
@@ -3117,8 +3121,10 @@ classdef preProcess < handle
                                 
                                 y = ktData(2.0:end, end);
                                 
-                                % If the UTS exceeds the range of UTS values, take
-                                % the last Kt value
+                                %{
+                                    If the UTS exceeds the range of UTS
+                                    values, take the last Kt value
+                                %}
                                 if uts > x(end)
                                     setappdata(0, 'kt', y(end))
                                     messenger.writeMessage(42.0)
@@ -3126,13 +3132,17 @@ classdef preProcess < handle
                                     setappdata(0, 'kt', interp1(x, y, uts))
                                 end
                             elseif isempty(find(Rz == ktCurve_i, 1.0)) == 0.0
-                                % The user Rz value is an exact match so there
-                                % is no need to interpolate
+                                %{
+                                    The user Rz value is an exact match so
+                                    there is no need to interpolate
+                                %}
                                 
-                                y = ktData(2.0:end, find(Rz == ktCurve_i, 1.0));
+                                y = ktData(2.0:end, 1.0 + find(Rz == ktCurve_i, 1.0));
                                 
-                                % If the UTS exceeds the range of UTS values, take
-                                % the last Kt value
+                                %{
+                                    If the UTS exceeds the range of UTS
+                                    values, take the last Kt value
+                                %}
                                 if uts > x(end)
                                     setappdata(0, 'kt', y(end))
                                     messenger.writeMessage(42.0)
@@ -3140,8 +3150,10 @@ classdef preProcess < handle
                                     setappdata(0, 'kt', interp1(x, y, uts))
                                 end
                             else
-                                % Interpolate to find the Kt data corresponding
-                                % to the user Rz value
+                                %{
+                                    Interpolate to find the Kt data
+                                    corresponding to the user Rz value
+                                %}
                                 for i = 1:length(Rz) - 1.0
                                     if ktCurve_i > Rz(i) && ktCurve_i < Rz(i + 1.0)
                                         Rz_lo = Rz(i);
@@ -3168,8 +3180,10 @@ classdef preProcess < handle
                                     y(i) = Kt2 - (((Kt2 - Kt1)/(Rz_hi - Rz_lo))*(ktCurve_i - Rz_lo));
                                 end
                                 
-                                % If the UTS exceeds the range of UTS values, take
-                                % the last Kt value
+                                %{
+                                    If the UTS exceeds the range of UTS
+                                    values, take the last Kt value
+                                %}
                                 if uts > x(end)
                                     setappdata(0, 'kt', y(end))
                                     messenger.writeMessage(42.0)
