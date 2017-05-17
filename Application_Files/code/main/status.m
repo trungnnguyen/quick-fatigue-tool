@@ -7,7 +7,7 @@ function [reported, x] = status(fid_status, analysedNodes, node, N2, nodalDamage
 %   status is used internally by Quick Fatigue Tool. The user is not
 %   required to run this file.
 %   
-%   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
+%   Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
 %   Last modified 04-Apr-2017 13:26:59 GMT
     
     %%

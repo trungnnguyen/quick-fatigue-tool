@@ -12,8 +12,8 @@ classdef multiaxialPreProcess < handle
 %   Reference section in Quick Fatigue Tool User Guide
 %      A3.2 Multiaxial Gauge Fatigue
 %   
-%   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 04-Apr-2017 13:26:59 GMT
+%   Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
+%   Last modified 17-May-2017 14:54:51 GMT
     
     %%
     
@@ -862,8 +862,10 @@ classdef multiaxialPreProcess < handle
                     x = ktData(:, 1.0);
                     y = ktData(:, ktCurve + 1.0);
                     
-                    % If the UTS exceeds the range of UTS values, take
-                    % the last Kt value
+                    %{
+                        If the UTS exceeds the range of UTS values, take
+                        the last Kt value
+                    %}
                     if isempty(uts)
                         errordlg('Error while processing surface finish definition. A value for the ultimate tensile strength is required when using Kt curves.',...
                             'Quick Fatigue Tool')
@@ -911,21 +913,27 @@ classdef multiaxialPreProcess < handle
                     x = ktData(2.0:end, 1.0);
                     
                     if isempty(find(Rz == ktCurve, 1.0)) == 0.0
-                        % The user Rz value is an exact match so there
-                        % is no need to interpolate
+                        %{
+                            The user Rz value is an exact match so there
+                            is no need to interpolate
+                        %}
                         
-                        y = ktData(2.0:end, find(Rz == ktCurve, 1.0));
+                        y = ktData(2.0:end, 1.0 + find(Rz == ktCurve, 1.0));
                         
-                        % If the UTS exceeds the range of UTS values, take
-                        % the last Kt value
+                        %{
+                            If the UTS exceeds the range of UTS values,
+                            take the last Kt value
+                        %}
                         if uts > x(end)
                             setappdata(0, 'kt', y(end))
                         else
                             setappdata(0, 'kt', interp1(x, y, uts))
                         end
                     else
-                        % Interpolate to find the Kt data corresponding
-                        % to the user Rz value
+                        %{
+                            Interpolate to find the Kt data corresponding
+                            to the user Rz value
+                        %}
                         for i = 1:length(Rz) - 1.0
                             if ktCurve > Rz(i) && ktCurve < Rz(i + 1.0)
                                 Rz_lo = Rz(i);
@@ -952,8 +960,10 @@ classdef multiaxialPreProcess < handle
                             y(i) = Kt2 - (((Kt2 - Kt1)/(Rz_hi - Rz_lo))*(ktCurve - Rz_lo));
                         end
                         
-                        % If the UTS exceeds the range of UTS values, take
-                        % the last Kt value
+                        %{
+                            If the UTS exceeds the range of UTS values,
+                            take the last Kt value
+                        %}
                         if uts > x(end)
                             setappdata(0, 'kt', y(end))
                         else

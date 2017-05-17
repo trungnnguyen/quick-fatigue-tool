@@ -12,7 +12,7 @@ function varargout = materialOptions(varargin)
 %   Reference section in Quick Fatigue Tool User Guide
 %      A3.2 Multiaxial Gauge Fatigue
 %   
-%   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
+%   Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
 %   Last modified 12-Apr-2017 12:25:20 GMT
     
     %%

@@ -7,7 +7,7 @@ classdef preProcess < handle
 %
 %   See also postProcess.
 %   
-%   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
+%   Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
 %   Last modified 15-May-2017 08:49:00 GMT
     
     %%

@@ -6,7 +6,7 @@ classdef qftWorkspace < handle
 %   QFTWORKSPACE is used internally by Quick Fatigue Tool. The user is not
 %   required to run this file.
 %   
-%   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
+%   Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
 %   Last modified 19-Apr-2017 14:29:55 GMT
     
     %%

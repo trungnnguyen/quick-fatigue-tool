@@ -9,7 +9,7 @@ function [] = virtualStrainGauge(xx_o, yy_o, xy_o, zz, xz, yz)
 %   Reference section in Quick Fatigue Tool User Guide
 %      4.9 Virtual strain gauges
 %    
-%    Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
+%    Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
 %    Last modified 04-Apr-2017 13:26:59 GMT
     
     %%

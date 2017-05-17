@@ -12,8 +12,8 @@ classdef multiaxialAnalysis < handle
 %   Reference section in Quick Fatigue Tool User Guide
 %      A3.2 Multiaxial Gauge Fatigue
 %   
-%   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
-%   Last modified 04-Apr-2017 13:26:59 GMT
+%   Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
+%   Last modified 17-May-2017 14:54:51 GMT
     
     %%
     
@@ -1677,6 +1677,21 @@ classdef multiaxialAnalysis < handle
                     user. Zero damage for cycles under the endurance limit
                     must also be enabled
                 %}
+                if cycle < fatigueLimit
+                    %{
+                        The current the cycle is below the fatigue limit, so
+                        assume no damage
+                    %}
+                    zeroDamage = 1.0;
+                elseif cycle >= fatigueLimit_original
+                    %{
+                        The current cycle exceeds the unmodified endurance
+                        limit. Reduce the endurance limit to 25% of the
+                        original value
+                    %}
+                    fatigueLimit = enduranceScale*fatigueLimit_original;
+                end
+                
                 if (fatigueLimit < fatigueLimit_original) && (cycle < fatigueLimit_original)
                     %{
                         The endurance limit was modified by a previous cycle. If the
@@ -1685,25 +1700,9 @@ classdef multiaxialAnalysis < handle
                         endurance limit
                     %}
                     fatigueLimit = fatigueLimit + ((fatigueLimit_original - (enduranceScale*fatigueLimit_original))/cyclesToRecover);
-                end
-                
-                if cycle < fatigueLimit
-                    %{
-                        The current the cycle is below the fatigue limit, so
-                        assume no damage
-                    %}
-                    zeroDamage = 1.0;
-                    return
-                elseif cycle > fatigueLimit_original
-                    %{
-                        The current cycle exceeds the unmodified endurance
-                        limit. Reduce the endurance limit to 25% of the
-                        original value
-                    %}
-                    fatigueLimit = enduranceScale*fatigueLimit_original;
-                end
+                end                
             elseif (isempty(fatigueLimit) == 0.0) && (ndEndurance == 1.0)
-                if cycle <= fatigueLimit
+                if cycle < fatigueLimit
                     %{
                         Treatment of the endurance limit is not enabled by
                         the user, zero damage for cycles below the

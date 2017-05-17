@@ -11,7 +11,7 @@ function varargout = ExportTool(varargin)%#ok<*DEFNU>
 %   Reference section in Quick Fatigue Tool User Guide
 %      10.4 The ODB Interface
 %   
-%   Quick Fatigue Tool 6.10-07 Copyright Louis Vallance 2017
+%   Quick Fatigue Tool 6.10-08 Copyright Louis Vallance 2017
 %   Last modified 04-Apr-2017 13:26:59 GMT
     
     %%
@@ -627,8 +627,8 @@ end
 % Open the log file for writing
 fid_debug = fopen(sprintf('%s\\%s.log', resultsDatabasePath, resultsDatabaseName), 'w+');
 clc
-fprintf(fid_debug, 'Quick Fatigue Tool 6.10-07 ODB Interface Log');
-fprintf('Quick Fatigue Tool 6.10-07 ODB Interface Log\n');
+fprintf(fid_debug, 'Quick Fatigue Tool 6.10-08 ODB Interface Log');
+fprintf('Quick Fatigue Tool 6.10-08 ODB Interface Log\n');
 
 % Get the selected position
 userPosition = get(handles.pMenu_elementPosition, 'value');
