@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="1564981743" file="E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox\Export Tool.prj" location="E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox" name="Export Tool" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="1744803179" file="E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\toolbox\Export Tool.prj" location="E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\toolbox" name="Export Tool" target="target.mlapps" target-name="Package App">
     <param.appname>Export Tool</param.appname>
     <param.authnamewatermark>Louis Vallance</param.authnamewatermark>
     <param.email>louisvallance@hotmail.co.uk</param.email>
@@ -13,7 +13,7 @@
     <param.summary>Abaqus ODB interface application for Quick Fatigue Tool</param.summary>
     <param.description>Export Tool allows the user to export field data from a completed fatigue analysis to an Abaqus Output Database (ODB) file which can be displayed in SIMULIA Abaqus/Viewer. For guidance on using Export Tool, please refer to Section 9.5 of the Quick Fatigue Tool User Guide.</param.description>
     <param.screenshot />
-    <param.version>6.10.07</param.version>
+    <param.version>6.10.08</param.version>
     <param.products.name>
       <item>MATLAB</item>
     </param.products.name>
@@ -25,7 +25,7 @@
     </param.products.version>
     <param.platforms />
     <param.output>${PROJECT_ROOT}\Export Tool.mlappinstall</param.output>
-    <param.guid>2da0116c-0985-42f7-b333-495a0141d66c</param.guid>
+    <param.guid>973c2628-f926-4089-8d91-2b1b8c1c6194</param.guid>
     <unset>
       <param.authnamewatermark />
       <param.email />
@@ -34,19 +34,19 @@
       <param.platforms />
     </unset>
     <fileset.main>
-      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\odb_interface\ExportTool.m</file>
+      <file>E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\code\odb_interface\ExportTool.m</file>
     </fileset.main>
     <fileset.depfun>
-      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\main\messenger.m</file>
-      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\odb_interface\ExportTool.fig</file>
-      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\odb_interface\python.m</file>
+      <file>E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\code\main\messenger.m</file>
+      <file>E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\code\odb_interface\ExportTool.fig</file>
+      <file>E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\code\odb_interface\python.m</file>
     </fileset.depfun>
     <fileset.resources>
-      <file>E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\code\odb_interface\icoR_bulb.jpg</file>
+      <file>E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\code\odb_interface\icoR_bulb.jpg</file>
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file location="E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox" name="Export Tool.mlappinstall" optional="false">E:\Projects\Quick Fatigue Tool\development\6.10-07_1717\Application_Files\toolbox\Export Tool.mlappinstall</file>
+      <file location="E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\toolbox" name="Export Tool.mlappinstall" optional="false">E:\Projects\Quick_Fatigue_Tool\git\quick-fatigue-tool\Application_Files\toolbox\Export Tool.mlappinstall</file>
     </build-deliverables>
     <workflow />
     <matlab>
